@@ -1,0 +1,99 @@
+#-*-coding:utf-8-*-
+
+'''
+# ----------------------------------------------------------------------------
+#  Purpose:     UserAgent实例对象
+#
+#  Author:      半片叶
+#
+#  Created:     2020.08.12
+#
+#        _       __    _     ___   ____
+#       | |\/|  / /\  \ \_/ | |_) | |_
+#       |_|  | /_/--\  |_|  |_|_) |_|__
+# ----------------------------------------------------------------------------
+'''
+
+import logging
+import fake_useragent
+from typing import List, Dict
+from shadow_useragent import ShadowUserAgent
+
+from models import MongoDatabase
+from maybe.parser.random_choice import randomChoice
+
+USER_AGENT_PATTERN = ["random", "circle", "choice", "popular", "default"]
+DEFAULT_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+
+
+class userAgent():
+    def __init__(self):
+        """
+        User-Agent 处理类
+        外部参数:
+            :param 无
+        内部参数:
+            :private user_agent: user_agent 代理选择列表
+            :private choice_type: 用户选择的方式
+            :private circle_index: 轮询方式时当前的轮询索引
+        """
+        self.user_agent = []
+        self.choice_type = "Default"
+        self.circle_index = -1
+
+    def set_choice_type(self, choice_type:str):
+        """
+        设置用户选择方式
+            :param choice_type: 用户选择方式
+        """
+        if choice_type.lower() in USER_AGENT_PATTERN:
+            self.choice_type = choice_type.lower().title()
+        else:
+            self.choice_type = "Default"
+
+    def get(self) -> dict:
+        """
+        获取一个可用的用户代理user-agent信息
+        :return:
+        """
+        self.user_agent = self.user_agent if self.user_agent else [DEFAULT_USER_AGENT, ]
+        if self.choice_type == "circle":
+            self.circle_index += 1
+            if self.circle_index >= len(self.user_agent):
+                self.circle_index = 0
+            return {"User-Agent": self.user_agent[self.circle_index]}
+        elif self.choice_type == "default":
+            return {"User-Agent": self.user_agent[0]}
+        elif self.choice_type in ["random", "choice"]:
+            return {"User-Agent": self.random.choice()}
+
+
+
+
+class popularUserAgent():
+    def __init__(self):
+        """
+        popularUserAgent 获取流行的UserAgent
+        外部参数:
+            :param 无
+        内部参数:
+            :private user_agent: user_agent列表
+            :private db: 数据库操作对象
+        """
+        self.user_agent = []
+
+    def get_user_agent(self):
+        """
+        通过 ShadowUserAgent 库获取流行的UserAgent
+        并存入到数据库 popular_user_agent 集合中
+        """
+        try:
+            ua = ShadowUserAgent()
+            ua.force_update()
+            self.data = ua.get_uas()
+            self.db = MongoDatabase().db
+            # 清空现有数据
+            self.db.popular_user_agent.drop()
+            self.db.popular_user_agent.insert_many(self.data)
+        except Exception as error:
+            logging.error(f"获取当日流行UserAgent列表信息错误：{error}")
