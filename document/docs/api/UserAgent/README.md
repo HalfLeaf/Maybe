@@ -9,11 +9,11 @@
 * 默认值: <b class="grey-bg pink-color"> default </b>
 * 可选值:
   * <b class="vue-color grey-bg"> Fix </b>
-  * <b class="vue-color grey-bg"> random </b>
-  * <b class="vue-color grey-bg"> circle </b>
-  * <b class="vue-color grey-bg"> choice </b>
-  * <b class="vue-color grey-bg"> popular </b>
-  * <b class="vue-color grey-bg"> default </b>
+  * <b class="vue-color grey-bg"> Random </b>
+  * <b class="vue-color grey-bg"> Circle </b>
+  * <b class="vue-color grey-bg"> Choice </b>
+  * <b class="vue-color grey-bg"> Popular </b>
+  * <b class="vue-color grey-bg"> Default </b>
 
 :::tip 提示
 上述参数对英文字母的大小写不敏感！同时支持大写和小写方式

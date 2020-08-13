@@ -15,6 +15,7 @@
 '''
 
 import logging
+import fake_useragent
 from shadow_useragent import ShadowUserAgent
 
 from models import MongoDatabase
