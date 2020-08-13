@@ -2,37 +2,37 @@
 
 '''
 # ----------------------------------------------------------------------------
-#    Purpose:     用于获取数据源文件
+#  Purpose:     随机数据生成获取
 #
-#    Author:      半片叶
+#  Author:      半片叶
 #
-#    Created:     2020.06.10
+#  Created:     2020.08.12
 #
-#    ██╗   ██╗  ███████╗
-#    ╚██╗ ██╔╝  ██╔════╝
-#     ╚████╔╝   █████╗
-#      ╚██╔╝    ██╔══╝
-#       ██║     ███████╗
-#       ╚═╝     ╚══════╝
+#        _       __    _     ___   ____
+#       | |\/|  / /\  \ \_/ | |_) | |_
+#       |_|  | /_/--\  |_|  |_|_) |_|__
 # ----------------------------------------------------------------------------
 '''
 
 import numpy as np
 from random import choice
-from typing import Generator,Any
+from typing import Any,List,Dict
 
 
 class randomChoice():
-    def __init__(self):
+    def __init__(self, size:int=5):
         """
         随机选择类
+        外部参数:
+            :param size:生成的数据量总数
         """
         self.source = None
         self.data = None
+        self.size = size
         self.choice_source = []
         self.weight = np.array([])
 
-    def add(self, data:[list, dict]):
+    def add(self, data:[List[Any], Dict]):
         """
         添加数据集
             :param data: 数据集
@@ -54,16 +54,22 @@ class randomChoice():
             _weight = np.array(list(self.source.values()))
             self.weight = _weight / _weight.sum() if _weight.sum() != 0 else None
 
-    def get(self, total:int=1) -> Generator:
+    def get(self, total:int=1) -> Any:
         """
         随机选择指定数量的样本
             :param total: 选择的数量
         :return:
         """
-        if self.weight.size > 0:
-            yield from list(np.random.choice(self.data, size=total, replace=True, p=self.weight))
+        try:
+            total = int(total)
+        except:
+            total = 1
+        p = self.weight if self.weight.size >0 else None
+        if total<=1:
+            return choice(list(np.random.choice(self.data, size=self.size, replace=True, p=p)))
         else:
-            yield from list(np.random.choice(self.data, size=total, replace=True))
+            return list(np.random.choice(self.data, size=total, replace=True, p=p))
+
 
     def choice(self) -> Any:
         """
@@ -72,7 +78,7 @@ class randomChoice():
         if self.choice_source:
             return choice(self.data)
         elif self.weight.size > 0:
-            self.choice_source = list(np.random.choice(self.data, size=20, replace=True, p=self.weight))
+            self.choice_source = list(np.random.choice(self.data, size=self.size, replace=True, p=self.weight))
         else:
-            self.choice_source = list(np.random.choice(self.data, size=20, replace=True))
+            self.choice_source = list(np.random.choice(self.data, size=self.size, replace=True))
         return choice(self.choice_source)

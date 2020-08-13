@@ -1,0 +1,7 @@
+.idea
+*.pyc
+/backend/maybe/parser/__pycache__/*.gitignore
+/backend/config/__pycache__/.gitignore
+/backend/maybe/utils/data/infos.pk
+/backend/maybe/utils/data/useragents.pk
+/backend/test.py
