@@ -24,13 +24,11 @@ class DefaultPattern():
         通过获取 数据库中已保存的每种实例对象的默认值信息
         返回给用户当前实例对象的默认值
         外部参数:
-            :param algorithm: 数据学习算法，已支持如下算法:
+            :param ins: 数据对象类型
                 1.
         内部参数:
-
-        备注:
-            该类暂不开放，2.0版本之后开发
         """
+
         if ins.lower() in []:
             self.ins = ins
         else:
