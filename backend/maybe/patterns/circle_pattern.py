@@ -2,7 +2,7 @@
 
 '''
 # ----------------------------------------------------------------------------
-#  Purpose:     轮询数据生成获取
+#  Purpose:     轮询模式 · 数据生成获取
 #
 #  Author:      半片叶
 #
@@ -17,7 +17,7 @@
 from typing import Any,List,Dict
 
 
-class Circle():
+class CirclePattern():
     def __init__(self):
         """
         轮询遍历类

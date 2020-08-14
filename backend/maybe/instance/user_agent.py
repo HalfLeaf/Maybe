@@ -19,7 +19,7 @@ import fake_useragent
 from shadow_useragent import ShadowUserAgent
 
 from models import MongoDatabase
-from maybe.patterns.circle import Circle
+from maybe.patterns.circle_pattern import Circle
 from maybe.patterns.random_choice import randomChoice
 
 USER_AGENT_PATTERN = ["random", "circle", "choice", "popular", "default"]
