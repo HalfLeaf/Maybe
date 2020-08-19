@@ -12,3 +12,20 @@
 * <span class="vue-color grey-bg">错误域 : </span>  不符合接口定义范围的参数
 * <span class="vue-color grey-bg">安全域 : </span>  涉及到安全测试领域的部分请求参数
 
+## 测试数据实例对象
+* <span class="vue-color grey-bg">Python基本数据类型 : </span>  python基本的数据类型，包括:
+    * <span class="vue-color grey-bg">Int </span>
+    * <span class="vue-color grey-bg">Float </span>
+    * <span class="vue-color grey-bg">Bool </span>
+    * <span class="vue-color grey-bg">List </span>
+    * <span class="vue-color grey-bg">Dict </span>
+    * <span class="vue-color grey-bg">String </span>
+* <span class="vue-color grey-bg"> 常用属性对象: </span>  常用的可用于随机生成的属性对象，包括:
+    * <span class="vue-color grey-bg">UserAgent </span>
+    * <span class="vue-color grey-bg">Country </span>
+    * <span class="vue-color grey-bg">Citys </span>
+    * <span class="vue-color grey-bg">Address </span>
+    * <span class="vue-color grey-bg">PhoneNumber </span>
+    * <span class="vue-color grey-bg">Email </span>
+* <span class="vue-color grey-bg">数据库对象 : </span>  用于连接数据库，获取数据库中指定文档数据
+* <span class="vue-color grey-bg">用户自定义对象 : </span>  用户编写的python类，经解析后，接入Maybe系统
