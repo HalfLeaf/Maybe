@@ -74,7 +74,6 @@ class ChoicePattern():
             _weight = np.array(weights)
             self.weight = _weight / _weight.sum() if _weight.sum() != 0 else None
 
-
     def get(self, total: int = 1) -> Any:
         """
         随机选择指定数量的样本

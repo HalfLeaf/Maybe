@@ -19,8 +19,8 @@ import fake_useragent
 from shadow_useragent import ShadowUserAgent
 
 from models import MongoDatabase
-from maybe.patterns.circle_pattern import Circle
 from maybe.patterns.random_choice import randomChoice
+from maybe.patterns.circle_pattern import CirclePattern
 
 USER_AGENT_PATTERN = ["random", "circle", "choice", "popular", "default"]
 DEFAULT_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"

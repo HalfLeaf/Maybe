@@ -70,7 +70,6 @@ class randomChoice():
         else:
             return list(np.random.choice(self.data, size=total, replace=True, p=p))
 
-
     def choice(self) -> Any:
         """
         获取一条随机选择的数据

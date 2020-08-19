@@ -20,8 +20,12 @@ from config import config
 class MongoDatabase():
     """
     创建MongoDB数据库操作对象，默认单实例模式
-    可通过关键字参数:
-        :private new_instance 来控制是否创建新实例对象
+        可通过关键字参数设置是否创建新的连接对象:
+            :param new_instance 来控制是否创建新实例对象
+            :param db_name 连接的数据库名称
+                默认值: maybe
+        内部参数:
+            :private _db:数据库操作对象
     """
     _instance = None
 
