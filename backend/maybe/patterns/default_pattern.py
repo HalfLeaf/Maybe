@@ -46,5 +46,6 @@ class DefaultPattern():
         获取数据集
         """
         if self.ins:
-            self._db.instance_default_value.get()
+            self._db.instance_default_value.find({}, {})
+            
 

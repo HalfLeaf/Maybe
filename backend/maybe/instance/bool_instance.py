@@ -15,10 +15,19 @@
 '''
 
 from typing import Any
+from maybe.patterns.random_pattern import RandomPattern
 
 class BoolData():
     def __init__(self):
-        pass
+        """
+        Bool类型测试数据
+            外部参数:
+                无
+            内部参数:
+                :private _random:随机取值对象
+        """
+        self._random = RandomPattern()
+        self._random.add([True, False])
 
     def get(self, field="") ->Any:
         """
@@ -27,6 +36,7 @@ class BoolData():
                 :param field:指定的参数域
             返回值:
         """
+        pass
 
     def _get_effective_field(self) -> bool:
         """
@@ -36,6 +46,6 @@ class BoolData():
             返回值:
                 正确的Python Bool类型数据
         """
-        return choice([True, False])
+        return self._random.get()
 
 

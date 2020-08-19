@@ -20,7 +20,7 @@ from typing import Any,List,Dict
 class RandomPattern():
     def __init__(self):
         """
-        轮询遍历类
+        随机取值类
         外部参数:
             :param 无
         内部参数:
