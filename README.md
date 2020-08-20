@@ -22,11 +22,14 @@ API接口探索性自动化测试平台
 * backend: 主要存放后台处理代码
     * 采用 Python fastapi框架搭建
     * 整个框架核心，单独存放在maybe目录下
+    * 默认地址: http://localhost:8866/
 * frontend: 主要存放后台处理代码
     * 采用Vue框架渲染界面
     * 使用vueify组件库搭建组件
+    * 默认地址: http://localhost:8686/
 * document: 主要存放markdown文档，包括使用手册，API接口说明等
     * 采用Vuepress框架渲染界面
+    * 默认地址: http://localhost:8668/
 * docs: 主要存放一些设计方案，设计思路等office文档
 
 项目目前正在孕育孵化中...
