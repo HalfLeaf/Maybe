@@ -14,7 +14,10 @@
 # ----------------------------------------------------------------------------
 '''
 
+import asyncio
 from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
+
 from config import config
 
 class MongoDatabase():
@@ -45,6 +48,39 @@ class MongoDatabase():
         client = MongoClient(host=config.MONGODB_IP, port=config.MONGODB_PORT)
         self._db = client[db_name]
         self._db.authenticate(config.MONGODB_USERNAME, config.MONGODB_PASSWORD)
+
+    @property
+    def db(self) -> MongoClient:
+        """获取数据库操作对象"""
+        return self._db
+
+
+class Motor_Connection():
+    __instance = None
+    def __new__(cls):
+        if Motor_Connection.__instance is None:
+            Motor_Connection.__instance = object.__new__(cls)
+            try:
+                loop = asyncio.get_event_loop()
+            except:
+                loop = asyncio.new_event_loop()
+            Motor_Connection.__instance.client = AsyncIOMotorClient(
+                    config.MONGODB_IP,
+                    config.MONGODB_PORT,
+                    io_loop=loop
+                )
+            Motor_Connection.__instance =  Motor_Connection.__instance.client
+        return Motor_Connection.__instance
+
+    def __init__(self, db_name="maybe"):
+        """
+        实例化数据库对象，连接
+        外部参数:
+            :param db_name: 连接的数据库名称，默认为maybe
+        内部参数:
+            db:数据库操作对象
+        """
+        self._db = Motor_Connection.__instance[db_name]
 
     @property
     def db(self) -> MongoClient:
