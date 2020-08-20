@@ -24,6 +24,6 @@ module.exports = {
     subpage: 'src/main.js'
   },
   devServer: {
-    port: 6868, // 端口号
+    port: 8866, // 端口号
   },
 }

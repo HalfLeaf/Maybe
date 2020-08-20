@@ -3,7 +3,7 @@ module.exports = {
   title: 'Maybe',
   description: 'API接口探索性测试平台',
   author: '半片叶',
-  port:8866,
+  port:8686,
   head: [
     ['link', { rel: 'icon', href: '/maybe.png' }],
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css' }],
