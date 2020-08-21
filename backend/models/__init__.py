@@ -15,6 +15,7 @@
 '''
 
 import asyncio
+from urllib import parse
 from pymongo import MongoClient
 from motor.motor_asyncio import AsyncIOMotorClient
 
@@ -64,11 +65,11 @@ class Motor_Connection():
                 loop = asyncio.get_event_loop()
             except:
                 loop = asyncio.new_event_loop()
+
             Motor_Connection.__instance.client = AsyncIOMotorClient(
-                    config.MONGODB_IP,
-                    config.MONGODB_PORT,
-                    io_loop=loop
-                )
+                f"mongodb://{parse.quote_plus(config.MONGODB_USERNAME)}:{parse.quote_plus(config.MONGODB_PASSWORD)}@{config.MONGODB_IP}:{config.MONGODB_PORT}",
+                io_loop=loop
+            )
             Motor_Connection.__instance =  Motor_Connection.__instance.client
         return Motor_Connection.__instance
 

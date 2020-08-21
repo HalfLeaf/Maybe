@@ -27,9 +27,8 @@ class BoolData():
                 :private _random:随机取值对象
         """
         self._random = RandomPattern()
-        self._random.add([True, False])
 
-    def get(self, field="") ->Any:
+    def get(self, field="") -> Any:
         """
         获取bool类型值
             外部参数:
@@ -48,4 +47,13 @@ class BoolData():
         """
         return self._random.get()
 
+    def _get_invalid_field(self) -> bool:
+        """
+        获取Bool类型的无效域
+            外部参数:
+                无
+            返回值:
+                正确的Python Bool类型数据
+        """
+        return self._random.get()
 

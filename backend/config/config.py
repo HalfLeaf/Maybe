@@ -14,11 +14,9 @@
 # ----------------------------------------------------------------------------
 '''
 
-
 # MongoDB 数据库配置
 MONGODB_IP = "10.66.193.83"
 MONGODB_PORT = 27017
 MONGODB_USERNAME = "root"
 MONGODB_PASSWORD = "maybeRootUser8866"
 MONGODB_NAME = "maybe"
-
