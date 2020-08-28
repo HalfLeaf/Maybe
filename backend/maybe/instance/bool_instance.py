@@ -15,6 +15,7 @@
 '''
 
 from typing import Any
+from models.mongo_client import MongoDatabase
 from maybe.patterns.random_pattern import RandomPattern
 
 class BoolData():
@@ -27,6 +28,7 @@ class BoolData():
                 :private _random:随机取值对象
         """
         self._random = RandomPattern()
+        self.db = MongoDatabase().db
 
     def get(self, field="") -> Any:
         """
@@ -45,7 +47,7 @@ class BoolData():
             返回值:
                 正确的Python Bool类型数据
         """
-        return self._random.get()
+        return [x.get('value') for x in list(self.db.bool_instance.find({"field":"effective", "status":1}, {"value":1}))]
 
     def _get_invalid_field(self) -> bool:
         """
@@ -55,5 +57,5 @@ class BoolData():
             返回值:
                 正确的Python Bool类型数据
         """
-        return self._random.get()
+        return [x.get('value') for x in list(self.db.bool_instance.find({"field":"invalid", "status":1}, {"value":1}))]
 

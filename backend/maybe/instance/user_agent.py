@@ -18,7 +18,7 @@ import logging
 import fake_useragent
 from shadow_useragent import ShadowUserAgent
 
-from models import MongoDatabase
+from models.mongo_client import MongoDatabase
 from maybe.patterns.random_choice import randomChoice
 from maybe.patterns.circle_pattern import CirclePattern
 

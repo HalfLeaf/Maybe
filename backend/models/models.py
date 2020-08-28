@@ -13,6 +13,7 @@
 # ----------------------------------------------------------------------------
 '''
 
+from datetime import datetime
 from mongoengine import (Document, BooleanField, StringField, UUIDField, FloatField,
                          ReferenceField, IntField, ListField, DateTimeField, DictField)
 
@@ -30,9 +31,21 @@ class DataInstance(Document):
     # 用户经验值
     experience_value = ListField()
 
+
+
 class ExperienceData(Document):
     # 数据实例名称
     name = StringField()
     # 用户经验值
     experience_value = ListField()
+
+
+class BoolInstance(Document):
+    field = StringField()  # 域类型
+    value = ListField()  # 值
+    status = IntField(default=1) # 状态 0-删除，1-可用
+    creator = StringField() # 创建者
+    create_time = DateTimeField(default=datetime.utcnow) # 创建时间
+    delete_time = DateTimeField()  # 删除时间
+    modify_time = DateTimeField()  # 修改时间
 

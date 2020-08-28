@@ -15,7 +15,7 @@
 '''
 
 from typing import Any
-from models import MongoDatabase
+from models.mongo_client import MongoDatabase
 
 class DefaultPattern():
     def __init__(self, ins:str=""):
