@@ -16,7 +16,6 @@
 
 from typing import Any
 from models.mongo_client import MongoDatabase
-from maybe.patterns.random_pattern import RandomPattern
 
 class BoolData():
     def __init__(self):
@@ -25,12 +24,10 @@ class BoolData():
             外部参数:
                 无
             内部参数:
-                :private _random:随机取值对象
                 :private _effective:有效域值缓存对象
                 :private _invalid:无效域值缓存对象
                 :private _experience:推测域值缓存对象
         """
-        self._random = RandomPattern()
         self.db = MongoDatabase().db
         self._effective = None
         self._invalid = None
@@ -43,7 +40,12 @@ class BoolData():
                 :param field:指定的参数域
             返回值:
         """
-        pass
+        if field == "invalid":
+            return self._get_invalid_field()
+        elif field == "experience":
+            return self._get_experience_field()
+        else:
+            return self._get_effective_field()
 
     def _get_effective_field(self) -> bool:
         """

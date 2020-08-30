@@ -14,12 +14,12 @@
 # ----------------------------------------------------------------------------
 '''
 
+from faker import Faker
 from typing import List, Dict
 
 
 class IntData():
-    def __init__(self, require:bool, equivalence_class_analysis:Dict,
-                 boundary_value_analysis:Dict, error_value_analysis:Dict):
+    def __init__(self):
         """
         INT 整型数据对象
             外部参数:
@@ -28,12 +28,9 @@ class IntData():
                 :param boundary_value_analysis:边界值分析法
                 :param error_value_analysis:错误推测法
             内部参数:
-
+                :private fake:Faker对象
         """
-        self.require = require
-        self.error_value_analysis = error_value_analysis
-        self.boundary_value_analysis = boundary_value_analysis
-        self.equivalence_class_analysis = equivalence_class_analysis
+        self.fake = Faker()
 
     def parser(self):
         """
