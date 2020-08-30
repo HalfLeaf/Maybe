@@ -26,9 +26,15 @@ class BoolData():
                 无
             内部参数:
                 :private _random:随机取值对象
+                :private _effective:有效域值缓存对象
+                :private _invalid:无效域值缓存对象
+                :private _experience:推测域值缓存对象
         """
         self._random = RandomPattern()
         self.db = MongoDatabase().db
+        self._effective = None
+        self._invalid = None
+        self._experience = None
 
     def get(self, field="") -> Any:
         """
@@ -47,7 +53,9 @@ class BoolData():
             返回值:
                 正确的Python Bool类型数据
         """
-        return [x.get('value') for x in list(self.db.bool_instance.find({"field":"effective", "status":1}, {"value":1}))]
+        if not self._effective:
+            self._effective = [x.get('value') for x in list(self.db.bool_instance.find({"field":"effective", "status":1}, {"value":1}))]
+        return self._effective
 
     def _get_invalid_field(self) -> bool:
         """
@@ -57,5 +65,18 @@ class BoolData():
             返回值:
                 正确的Python Bool类型数据
         """
-        return [x.get('value') for x in list(self.db.bool_instance.find({"field":"invalid", "status":1}, {"value":1}))]
+        if not self._invalid:
+            self._invalid = [x.get('value') for x in list(self.db.bool_instance.find({"field":"invalid", "status":1}, {"value":1}))]
+        return self._invalid
 
+    def _get_experience_field(self) -> bool:
+        """
+        获取Bool类型的推测域
+            外部参数:
+                无
+            返回值:
+                正确的Python Bool类型数据
+        """
+        if self._experience:
+            self._experience = [x.get('value') for x in list(self.db.bool_instance.find({"field":"experience", "status":1}, {"value":1}))]
+        return self._experience
