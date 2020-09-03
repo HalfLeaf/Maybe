@@ -25,7 +25,7 @@ module.exports = {
       {text: '更新记录', link: '/updater/'}, 
     ],
     sidebar: 'auto', 
-    sidebarDepth: 4, 
+    sidebarDepth: 5,
   },
   sidebar:[
     ['/', '首页'],
