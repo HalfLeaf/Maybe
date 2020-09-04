@@ -13,8 +13,8 @@
 #       |_|  | /_/--\  |_|  |_|_) |_|__
 # ----------------------------------------------------------------------------
 '''
-
-from typing import Any,List,Dict
+from random import choice
+from typing import Any, List, Dict
 
 
 class RandomPattern():
@@ -25,14 +25,10 @@ class RandomPattern():
             :param 无
         内部参数:
             :private data: 轮询数据源，目前只支持 List 和 Dict两种类型
-            :private _total: 数据源条目总数
-            :private _circle_index: 当前轮询索引下标值
         """
         self.data = None
-        self._total = 0
-        self._circle_index = -1
 
-    def add(self, data:[List[Any], Dict]):
+    def add(self, data: [List[Any], Dict]):
         """
         添加数据集
             :param data: 数据集，目前只支持 List 和 Dict两种类型
@@ -42,7 +38,8 @@ class RandomPattern():
             self.data = data
         elif isinstance(self.data, dict):
             self.data = list(data.keys())
-        self._total = len(self.data)
+        else:
+            self.data = [data]
 
     def get(self) -> Any:
         """
@@ -50,9 +47,4 @@ class RandomPattern():
         返回值:
             任意类型的数据单元
         """
-        if not self._total:
-            return None
-        self._circle_index = self._circle_index + 1
-        if self._circle_index + 1 > self._total:
-            self._circle_index = 0
-        return self.data[self._circle_index]
+        return choice(self.data)
