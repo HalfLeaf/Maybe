@@ -23,3 +23,9 @@ MONGODB_NAME = "maybe"
 
 # 默认int数据生成值位数
 DEFAULT_INTER_BIT = 32
+
+# 域配置
+EFFECTIVE_FILED = "effective"
+INVALID_FILED = "invalid"
+BOUNDARY_FILED = "boundary"
+EXPERIENCE_FILED = "experience"

@@ -1,5 +1,4 @@
-#-*-coding:utf-8-*-
-
+# -*-coding:utf-8-*-
 '''
 # ----------------------------------------------------------------------------
 #  Purpose:     INT 实例对象
@@ -13,10 +12,12 @@
 #       |_|  | /_/--\  |_|  |_|_) |_|__
 # ----------------------------------------------------------------------------
 '''
+
 import logging
+from config import config
 from maybe.utils import utils
 from maybe.faker_provider import fake
-from config.config import DEFAULT_INTER_BIT
+
 
 class IntData():
     def __init__(self, **kwargs):
@@ -58,8 +59,6 @@ class IntData():
             "int": 32,
             "long": 64,
         }
-
-        # 排除结果标志位， 0 表示范围， 1表示列表包含
         self._exclude_flag = 1
 
     def parser(self):
@@ -74,30 +73,27 @@ class IntData():
             self.inter_bits = None
             self._parser_limit_values()
         else:
-            self.inter_bits = DEFAULT_INTER_BIT
+            self.inter_bits = config.DEFAULT_INTER_BIT
 
         self._parser_exclude_values()
 
-    def get(self, field: str = "effective") -> int:
+    def get(self) -> int:
         """
         获取测试数据
         """
-        if field == "effective":
+        value = fake.pyint(min_value=self.min_value, max_value=self.max_value)
+        retry = 20
+        while retry and self._exclude_flag and value in self.exclude:
             value = fake.pyint(min_value=self.min_value, max_value=self.max_value)
-            retry = 20
-            while retry and self._exclude_flag and value in self.exclude:
-                value = fake.pyint(min_value=self.min_value, max_value=self.max_value)
-                retry = retry - 1
-                if retry == 0:
-                    value = None
-            while retry and not self._exclude_flag and self.exclude[0] <= value <= self.exclude[1]:
-                value = fake.pyint(min_value=self.min_value, max_value=self.max_value)
-                retry = retry - 1
-                if retry == 0:
-                    value = None
-            return value
-        elif field == "invalid":
-            return 1
+            retry = retry - 1
+            if retry == 0:
+                value = None
+        while retry and not self._exclude_flag and self.exclude[0] <= value <= self.exclude[1]:
+            value = fake.pyint(min_value=self.min_value, max_value=self.max_value)
+            retry = retry - 1
+            if retry == 0:
+                value = None
+        return value
 
     def _parser_inter_bits(self):
         """
@@ -105,13 +101,13 @@ class IntData():
         """
         # 字符串形式进行整数转化
         if isinstance(self.inter_bits, str):
-            self.inter_bits = self._inter_string_mapping.get(self.inter_bits.lower(), DEFAULT_INTER_BIT)
+            self.inter_bits = self._inter_string_mapping.get(self.inter_bits.lower(), config.DEFAULT_INTER_BIT)
 
         if isinstance(self.inter_bits, int):
             try:
                 self.inter_bits = int(self.inter_bits)
             except Exception as error:
-                self.inter_bits = DEFAULT_INTER_BIT
+                self.inter_bits = config.DEFAULT_INTER_BIT
                 logging.error(f"inter_bits参数解析错误: {error}")
             self.max_value = 2 ** self.inter_bits
             self.min_value = -(2 ** self.inter_bits) if self.is_support_negative else 0
@@ -141,11 +137,11 @@ class IntData():
             logging.error(f"根据用户设置的最小值，生成对应的最大值错误:{error}")
             self.min_value = 0
             return 2 ** 16
-        if abs(self.min_value) <= (2**16 - 1):
+        if abs(self.min_value) <= (2 ** 16 - 1):
             return 2 ** 16
-        elif abs(self.min_value) <= (2**32 - 1):
+        elif abs(self.min_value) <= (2 ** 32 - 1):
             return 2 ** 32
-        elif abs(self.min_value) <= (2**64 - 1):
+        elif abs(self.min_value) <= (2 ** 64 - 1):
             return 2 ** 64
         else:
             logging.warning(f"用户设置的最小值超出位数限制！")
@@ -161,14 +157,14 @@ class IntData():
             self.max_value = int(self.max_value)
         except Exception as error:
             logging.error(f"根据用户设置的最小值，生成对应的最大值错误:{error}")
-            self.max_value = 2 ** DEFAULT_INTER_BIT
+            self.max_value = 2 ** config.DEFAULT_INTER_BIT
             return 0
 
-        if abs(self.max_value) <= (2**16):
+        if abs(self.max_value) <= (2 ** 16):
             return 0
-        elif abs(self.max_value) <= (2**32):
+        elif abs(self.max_value) <= (2 ** 32):
             return 2 ** 16
-        elif abs(self.max_value) <= (2**64):
+        elif abs(self.max_value) <= (2 ** 64):
             return 2 ** 32
         else:
             logging.warning(f"用户设置的最大值超出位数限制！")
@@ -182,7 +178,7 @@ class IntData():
             self.max_value = int(self.max_value)
         except Exception as error:
             logging.error(f"用户设置的最大值转为数字失败:{error}")
-            self.max_value = 2 ** DEFAULT_INTER_BIT
+            self.max_value = 2 ** config.DEFAULT_INTER_BIT
 
         try:
             self.min_value = int(self.min_value)
@@ -207,7 +203,7 @@ class IntData():
                 self.exclude = utils.str2int(values, [])
                 return
             start = values[0]
-            for i in range(length-1, 0, -1):
+            for i in range(length - 1, 0, -1):
                 end = values[i]
                 if end == start:
                     self.exclude = utils.str2int(start, [])
@@ -218,4 +214,3 @@ class IntData():
                     break
             else:
                 self.exclude = utils.str2int(values, [])
-
