@@ -9,30 +9,30 @@
 #  Created:     2020.08.31
 #
 #        _        __    _     ___   ____
-#       | |\/|  / /\  \ \_/ | |_) | |_
+#       | |\/|   / /\  \ \_/ | |_) | |_
 #       |_|  | /_/--\  |_|  |_|_) |_|__
 # ----------------------------------------------------------------------------
 '''
 
 from faker import Faker
-from maybe.faker_provider.int_stance import IntStance
-
 
 class FakerInstance():
-    def __init__(self):
+    def __init__(self, is_new: bool = True, locales: str = "zh_CN"):
         """
         全局实例化Faker对象
             外部参数:
                 无
             内部参数:
-                :private faker: Faker实例对象
+                :private fake: Faker实例对象
         """
-        self.faker = Faker()
-        self.faker.add_provider(IntStance)
+        if is_new:
+            Faker.seed(0)
+        self._fake = Faker(locales)
+        # self.faker.add_provider()
 
     @property
-    def faker(self):
-        return self.faker
+    def fake(self):
+        return self._fake
 
 
-faker = FakerInstance().faker
+fake = FakerInstance().fake

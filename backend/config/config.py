@@ -20,3 +20,6 @@ MONGODB_PORT = 27017
 MONGODB_USERNAME = "root"
 MONGODB_PASSWORD = "maybeRootUser8866"
 MONGODB_NAME = "maybe"
+
+# 默认int数据生成值位数
+DEFAULT_INTER_BIT = 32

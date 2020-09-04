@@ -14,8 +14,9 @@
 # ----------------------------------------------------------------------------
 '''
 import logging
-from typing import List, Dict
-
+from maybe.utils import utils
+from maybe.faker_provider import fake
+from config.config import DEFAULT_INTER_BIT
 
 class IntData():
     def __init__(self, **kwargs):
@@ -23,14 +24,14 @@ class IntData():
         INT 整型数据对象
             外部参数:
                     :param kwargs:关键字参数
-                        :param interer_bits:整数位数
+                        :param inter_bits:整数位数
                         :param max_value:整数范围最大值
                         :param min_value:整数范围最小值
                         :param exclude:排除选项
                         :param is_support_negative:是否支持负数
                         :param is_add_boundary_field:是否添加到边界域
             内部参数:
-                    :private interer_bits:整数位数,可配置：
+                    :private inter_bits:整数位数,可配置：
                         参数类型: int/string
                         可支持配置:
                             8 / byte
@@ -42,35 +43,80 @@ class IntData():
                     :private exclude:排除选项
                     :private is_support_negative:是否支持负数
                     :private is_add_boundary_field:是否添加到边界域
+                    :private _inter_string_mapping: inter_bits参数为str时，映射关系表
         """
-        self.interer_bits = kwargs.get('interer_bits', None)
+        self.inter_bits = kwargs.get('inter_bits', None)
         self.max_value = kwargs.get('max_value', None)
         self.min_value = kwargs.get('min_value', None)
         self.is_support_negative = kwargs.get('is_support_negative', False)
         self.exclude = kwargs.get('exclude', [])
         self.is_add_boundary_field = kwargs.get('is_add_boundary_field', True)
 
+        self._inter_string_mapping = {
+            "byte": 8,
+            "short": 16,
+            "int": 32,
+            "long": 64,
+        }
+
+        # 排除结果标志位， 0 表示范围， 1表示列表包含
+        self._exclude_flag = 1
+
     def parser(self):
         """
         解析数据
         """
-        if self.interer_bits:
+        if self.inter_bits:
             self.max_value = None
             self.min_value = None
-        elif not self.max_value is None and not self.min_value is None:
-            self.interer_bits = None
+            self._parser_inter_bits()
+        elif self.max_value is not None and self.min_value is not None:
+            self.inter_bits = None
             self._parser_limit_values()
         else:
-            self.interer_bits = 32
+            self.inter_bits = DEFAULT_INTER_BIT
 
-    def get(self) ->int:
+        self._parser_exclude_values()
+
+    def get(self, field: str = "effective") -> int:
         """
         获取测试数据
         """
-        pass
+        if field == "effective":
+            value = fake.pyint(min_value=self.min_value, max_value=self.max_value)
+            retry = 20
+            while retry and self._exclude_flag and value in self.exclude:
+                value = fake.pyint(min_value=self.min_value, max_value=self.max_value)
+                retry = retry - 1
+                if retry == 0:
+                    value = None
+            while retry and not self._exclude_flag and self.exclude[0] <= value <= self.exclude[1]:
+                value = fake.pyint(min_value=self.min_value, max_value=self.max_value)
+                retry = retry - 1
+                if retry == 0:
+                    value = None
+            return value
+        elif field == "invalid":
+            return 1
 
-    def _parser_interer_bits(self):
-        pass
+    def _parser_inter_bits(self):
+        """
+        解析用户配置的整数位数
+        """
+        # 字符串形式进行整数转化
+        if isinstance(self.inter_bits, str):
+            self.inter_bits = self._inter_string_mapping.get(self.inter_bits.lower(), DEFAULT_INTER_BIT)
+
+        if isinstance(self.inter_bits, int):
+            try:
+                self.inter_bits = int(self.inter_bits)
+            except Exception as error:
+                self.inter_bits = DEFAULT_INTER_BIT
+                logging.error(f"inter_bits参数解析错误: {error}")
+            self.max_value = 2 ** self.inter_bits
+            self.min_value = -(2 ** self.inter_bits) if self.is_support_negative else 0
+        else:
+            logging.error(f"inter_bits用户配置类型错误")
 
     def _parser_limit_values(self):
         """
@@ -95,11 +141,11 @@ class IntData():
             logging.error(f"根据用户设置的最小值，生成对应的最大值错误:{error}")
             self.min_value = 0
             return 2 ** 16
-        if abs(self.min_value) <= (2**16 -1):
+        if abs(self.min_value) <= (2**16 - 1):
             return 2 ** 16
-        elif abs(self.min_value) <= (2**32 -1):
+        elif abs(self.min_value) <= (2**32 - 1):
             return 2 ** 32
-        elif abs(self.min_value) <= (2**64 -1):
+        elif abs(self.min_value) <= (2**64 - 1):
             return 2 ** 64
         else:
             logging.warning(f"用户设置的最小值超出位数限制！")
@@ -115,7 +161,7 @@ class IntData():
             self.max_value = int(self.max_value)
         except Exception as error:
             logging.error(f"根据用户设置的最小值，生成对应的最大值错误:{error}")
-            self.max_value = 2 ** 16
+            self.max_value = 2 ** DEFAULT_INTER_BIT
             return 0
 
         if abs(self.max_value) <= (2**16):
@@ -132,6 +178,44 @@ class IntData():
         """
         校验生成用户设置的最大值，最小值
         """
-        pass
+        try:
+            self.max_value = int(self.max_value)
+        except Exception as error:
+            logging.error(f"用户设置的最大值转为数字失败:{error}")
+            self.max_value = 2 ** DEFAULT_INTER_BIT
 
+        try:
+            self.min_value = int(self.min_value)
+        except Exception as error:
+            logging.error(f"用户设置的最小值转为数字失败:{error}")
+            self.min_value = 0
+
+        # 确保最大值大，最小值小
+        if self.max_value < self.min_value:
+            self.max_value, self.min_value = self.min_value, self.max_value
+
+    def _parser_exclude_values(self):
+        """
+        解析需要从结果中排除的值
+        """
+        if isinstance(self.exclude, int):
+            self.exclude = [self.exclude, ]
+        elif isinstance(self.exclude, str):
+            values = self.exclude.replace(" ", "").split("-")
+            length = len(values)
+            if length < 2:
+                self.exclude = utils.str2int(values, [])
+                return
+            start = values[0]
+            for i in range(length-1, 0, -1):
+                end = values[i]
+                if end == start:
+                    self.exclude = utils.str2int(start, [])
+                    break
+                elif start < end:
+                    self._exclude_flag = 0
+                    self.exclude = utils.str2int([start, end], [])
+                    break
+            else:
+                self.exclude = utils.str2int(values, [])
 
