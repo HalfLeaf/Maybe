@@ -1,4 +1,4 @@
-#-*-coding:utf-8-*-
+# -*-coding:utf-8-*-
 
 '''
 # ----------------------------------------------------------------------------
@@ -23,6 +23,8 @@ MONGODB_NAME = "maybe"
 
 # 默认int数据生成值位数
 DEFAULT_INTER_BIT = 32
+DEFAULT_FLOAT_INTER_BIT = 3
+DEFAULT_FLOAT_DECIMAL_BIT = 3
 
 # 域配置
 EFFECTIVE_FILED = "effective"
