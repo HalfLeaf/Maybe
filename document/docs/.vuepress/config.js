@@ -15,9 +15,9 @@ module.exports = resolve({
     baseLang: 'zh-CN',
     themeColor:false,
     nav:[ // 导航栏配置
-      {text: '快速入门', link: '/quickly/', icon: 'infofill' },
       {text: '指南', link: '/guide/', icon: 'configuration'},
       {text: 'API文档', link: '/api/', icon: 'vue'},
+      {text: '设计理念', link: '/home/', icon: 'infofill' },
       {text: '更新记录', link: '/updater/', icon: 'questionfill'}, 
     ],
     sidebar: 'auto', 
@@ -26,6 +26,11 @@ module.exports = resolve({
     markdown: {
       enableAll: true,
     },
+    comment: {
+      type: "valine",
+      appId: "VVjE3KAOY4mRq6SXauTfp0FG-gzGzoHsz",
+      appKey: "t7rtj1n7FGvchU6h5wEks9J8",
+    }
   },
   sidebar:[
     ['/', '首页'],

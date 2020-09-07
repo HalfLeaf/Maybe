@@ -45,7 +45,7 @@ API层的测试，占据测试工作的三分天下，API接口的数据是否�
 * <span class="vue-color grey-bg">有效域 : </span>  预期符合接口规范的合理参数
 * <span class="vue-color grey-bg">无效域 : </span>  符合接口规范类型的不合理参数
 * <span class="vue-color grey-bg">边界域 : </span>  接口规范定义中边界范围的参数
-* <span class="vue-color grey-bg">推测域 : </span>  按照用户过往经验推测可能会出现问题的参数
+* <span class="vue-color grey-bg">经验域 : </span>  按照用户过往经验推测可能会出现问题的参数
 * <span class="grey-bg">安全域 : </span>  涉及到安全测试领域的部分请求参数（待开放）
 
 ## 测试数据实例对象
