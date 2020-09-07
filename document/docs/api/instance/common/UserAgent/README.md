@@ -1,6 +1,6 @@
 # UserAgent 用户代理
 
-[基础知识](/api/instance/UserAgent/BaseInfo.md)
+[基础知识](/api/common/UserAgent/BaseInfo.md)
 
 ## pattern
 <b class="grey-bg"> pattern </b>  指定数据生成方式
