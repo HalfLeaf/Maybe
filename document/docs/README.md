@@ -1,11 +1,16 @@
 ---
 home: true
-title: Maybe
+title: Maybe           
 heroImage: /maybe.png
-heroText: Maybe
+heroText: Maybe                    
 tagline: API接口探索性测试平台
-actionText: 查看 →
-actionLink: /home/
+action:
+  - text: 快速入门 ✍
+    link: /guide/
+  - text: API文档 ❤
+    link: /api/
+  - text: 设计思路 💡
+    link: /home/
 features:
 - title: 测试数据集中管理
   details: 接口测试数据平台化集中管理，智能推荐
