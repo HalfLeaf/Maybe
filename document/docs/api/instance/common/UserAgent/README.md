@@ -1,3 +1,11 @@
+---
+title: UserAgent 用户代理
+lang: zh-CN
+publish: true
+author: 半片叶
+date: 2020-08-23
+---
+
 # UserAgent 用户代理
 
 [基础知识](/api/common/UserAgent/BaseInfo.md)

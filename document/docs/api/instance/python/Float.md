@@ -1,3 +1,11 @@
+---
+title: Float 浮点数数据类型
+lang: zh-CN
+publish: true
+author: 半片叶
+date: 2020-08-23
+---
+
 # Float 浮点数类型
 
 ## 1. interer_bits

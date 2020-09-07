@@ -1,3 +1,11 @@
+---
+title: UserAgent 基础知识
+lang: zh-CN
+publish: true
+author: 半片叶
+date: 2020-08-23
+---
+
 # UserAgent 用户代理
 
 User Agent中文名为用户代理，简称 UA，它是一个特殊字符串头

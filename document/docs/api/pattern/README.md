@@ -1,3 +1,11 @@
+---
+title: 数据生成模式
+lang: zh-CN
+publish: true
+author: 半片叶
+date: 2020-08-23
+---
+
 # 数据生成模式
 
 <b class="grey-bg"> pattern </b>  指定数据生成模式，支持如下参数:
