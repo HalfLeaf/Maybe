@@ -27,6 +27,7 @@ module.exports = {
     sidebar: 'auto', 
     sidebarDepth: 5,
   },
+   lastUpdated: '上次更新时间',
   sidebar:[
     ['/', '首页'],
   ],
