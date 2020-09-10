@@ -7,4 +7,6 @@ time: 2020-08-23
 backToTop: true
 article: false
 timeline: false
+next: /api/instance/python/Dict.md
+prev: /api/instance/python/String.md
 ---

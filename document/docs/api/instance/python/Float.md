@@ -7,6 +7,8 @@ time: 2020-08-23
 backToTop: true
 article: false
 timeline: false
+next: /api/instance/python/Bool.md
+prev: /api/instance/python/Int.md
 ---
 
 # Float 浮点数类型
@@ -25,7 +27,7 @@ interer_bits 参数优先级最高
 
 interer_bits 初始默认值: None
 
-当参数 max_value 和 min_value 均为空值时，interer_bits自动配置为 3
+当参数 max_value 和 min_value 均为空值时，interer_bits自动配置为 <b class="blue-color grey-bg"> 3 </b>
 
 ## 2. decimal_bits
 

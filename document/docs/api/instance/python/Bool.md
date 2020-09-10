@@ -7,6 +7,8 @@ time: 2020-08-23
 backToTop: true
 article: false
 timeline: false
+next: /api/instance/python/String.md
+prev: /api/instance/python/Float.md
 ---
 
 # Bool  布尔数据类型

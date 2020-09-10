@@ -7,6 +7,7 @@ time: 2020-08-23
 backToTop: true
 article: false
 timeline: false
+next: /api/instance/python/Float.md
 ---
 
 # Int 整数类型
@@ -31,7 +32,7 @@ interer_bits 参数优先级最高
 
 interer_bits 初始默认值: None
 
-当参数 max_value 和 min_value 均为空值时，interer_bits自动配置为 32
+当参数 max_value 和 min_value 均为空值时，interer_bits自动配置为 <b class="blue-color grey-bg"> 32 </b>
 
 
 ## 2. max_value
@@ -109,7 +110,7 @@ exclude用于从生成的结果中排除某些不需要的数据，支持 int �
 
 * <b class="grey-bg"> string </b>
 
-用于排除指定范围的整数值，用 "-" 分割, 如:
+用于排除指定范围的整数值，用 <b class="blue-color grey-bg"> "-" </b> 分割, 如:
 
 ```python
 10 - 100
