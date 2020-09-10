@@ -109,3 +109,13 @@ prev: /api/instance/python/String.md
 参数默认值: <b class="grey-bg"> None </b>
 
 数据源在生成字符串时，根据此配置，剔除部分数据，保证最终生成的字符串中符合用户要求
+
+## 12. format
+
+参数描述: <b class="grey-bg"> 指定字符串生成的格式 </b>
+
+参数类型: <b class="pink-color grey-bg"> str </b>
+
+参数默认值: <b class="grey-bg"> "" </b>
+
+如需程序自动生成的数据部分，需用 <b class="blue-color grey-bg"> {} </b>

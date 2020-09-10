@@ -14,8 +14,11 @@
 # ----------------------------------------------------------------------------
 '''
 
+
+from maybe.faker_provider import fake
+
 class StringData():
     def __init__(self):
-        pass
+        fake.pystr()
 
 
