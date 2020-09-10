@@ -119,3 +119,12 @@ prev: /api/instance/python/String.md
 参数默认值: <b class="grey-bg"> "" </b>
 
 如需程序自动生成的数据部分，需用 <b class="blue-color grey-bg"> {} </b>
+
+例如:<b class="blue-color grey-bg"> @-#{random_digit} </b>
+
+可支持的自动生成的数据有：
+* <b class="vue-color grey-bg"> random_digit  </b>  随机数字
+* <b class="vue-color grey-bg"> random_lower  </b>  随机小写英文字母
+* <b class="vue-color grey-bg"> random_capital  </b>  随机大写英文字母
+* <b class="vue-color grey-bg"> random_character  </b>  随机中文字符
+* <b class="vue-color grey-bg"> random_punctuation  </b>  随机英文特殊字符
