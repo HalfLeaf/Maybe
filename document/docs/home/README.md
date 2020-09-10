@@ -58,11 +58,24 @@ API层的测试，占据测试工作的三分天下，API接口的数据是否�
     * <span class="pink-color grey-bg">Dict </span>  字典类型
 * <span class="vue-color grey-bg"> 常用属性对象: </span>  常用的可用于随机生成的属性对象，包括:
     * <span class="pink-color grey-bg">UserAgent </span>   用户代理信息
-    * <span class="pink-color grey-bg">Citys </span>  城市名
+    * <span class="pink-color grey-bg">City </span>  城市名
     * <span class="pink-color grey-bg">Country </span>  国家名
     * <span class="pink-color grey-bg">Address </span>  地址信息
     * <span class="pink-color grey-bg">Email </span>  邮件地址信息
+    * <span class="pink-color grey-bg">Username </span>  用户名信息
+    * <span class="pink-color grey-bg">Password </span>  密码信息
+    * <span class="pink-color grey-bg">DateTime </span>  日期信息
+    * <span class="pink-color grey-bg">Job </span>  职业信息
+    * <span class="pink-color grey-bg">Company </span>  公司信息
     * <span class="pink-color grey-bg">PhoneNumber </span>  手机号码信息
+    * <span class="pink-color grey-bg">Color </span>  颜色信息
+    * <span class="pink-color grey-bg">Geo </span>  地理信息
+    * <span class="pink-color grey-bg">Face </span>  人脸信息
+    * <span class="pink-color grey-bg">Fingerprint </span>  指纹信息
+    * <span class="pink-color grey-bg">Vehicle </span>  车辆信息
     * <span class="pink-color grey-bg">PlateNumber </span>  车牌号信息
+    * <span class="pink-color grey-bg">PlateNumber </span>  车牌号信息
+    * <span class="pink-color grey-bg">PlateNumber </span>  车牌号信息
+
 * <span class="vue-color grey-bg">数据库对象 : </span>  用于连接数据库，获取数据库中指定文档数据
 * <span class="vue-color grey-bg">用户自定义对象 : </span>  用户编写的python类，经解析后，接入Maybe系统
