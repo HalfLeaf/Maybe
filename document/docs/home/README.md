@@ -34,11 +34,15 @@ API层的测试，占据测试工作的三分天下，API接口的数据是否�
 
 所以Maybe要做的是: <span class="vue-color grey-bg">智能分析API接口，集中管理用户测试数据，让API接口测试通过数据分析更具智能化 </span>
 
-同时通过Maybe项目生成的测试数据，也将更贴合测试场景，根据用户使用场景，提供更加个性化的测试数据信息，如：
-    * <span class="vue-color grey-bg">Face </span>  人脸图片,包括真实场景下的人脸以及基于GAN生成的假脸图片
-    * <span class="vue-color grey-bg">Fingerprint </span>  指纹信息,包括真实场景下的指纹以及基于深度学习生成的指纹图片
-    * <span class="vue-color grey-bg">Vehicle </span>  车辆图片,各场景下的真实车辆图片以及基于深度学习生成的车辆图片
-    * <span class="vue-color grey-bg">PlateNumber </span>  车牌号,包括全球各国的车牌号、各场景下的真实车牌图片
+同时通过Maybe项目生成的测试数据，也将更贴合测试场景，根据用户使用场景，提供更加个性化的测试数据信息，如:
+* <span class="vue-color grey-bg">Face </span>  人脸图片,包括真实场景下的人脸以及基于GAN生成的假脸图片，包括各大洲，各色人种
+* <span class="vue-color grey-bg">Dog </span>  小狗图片
+* <span class="vue-color grey-bg">Cat </span>  猫咪图片
+* <span class="vue-color grey-bg">Pet </span>  宠物图片
+* <span class="vue-color grey-bg">Fingerprint </span>  指纹信息,包括真实场景下的指纹以及基于深度学习生成的指纹图片
+* <span class="vue-color grey-bg">Vehicle </span>  车辆图片,各场景下的真实车辆图片以及基于深度学习生成的车辆图片
+* <span class="vue-color grey-bg">PlateNumber </span>  车牌号,包括全球各国的车牌号、各场景下的真实车牌图片
+
 
 <span class="pink-color grey-bg">集千万用户经验，我也能满级刷BOSS！ </span>
 
@@ -49,12 +53,14 @@ API层的测试，占据测试工作的三分天下，API接口的数据是否�
 * 测试数据智能推荐平台
 * 测试报告智能分析平台
 
+
 ## 测试数据分类
 * <span class="vue-color grey-bg">有效域 : </span>  预期符合接口规范的合理参数
 * <span class="vue-color grey-bg">无效域 : </span>  符合接口规范类型的不合理参数
 * <span class="vue-color grey-bg">边界域 : </span>  接口规范定义中边界范围的参数
 * <span class="vue-color grey-bg">经验域 : </span>  按照用户过往经验推测可能会出现问题的参数
 * <span class="grey-bg">安全域 : </span>  涉及到安全测试领域的部分请求参数（待开放）
+
 
 ## 测试数据实例对象
 * <span class="vue-color grey-bg">Python基本数据类型 : </span>  python基本的数据类型，包括:
@@ -64,6 +70,7 @@ API层的测试，占据测试工作的三分天下，API接口的数据是否�
     * <span class="pink-color grey-bg">String </span>  字符串类型
     * <span class="pink-color grey-bg">List </span>  列表类型
     * <span class="pink-color grey-bg">Dict </span>  字典类型
+
 * <span class="vue-color grey-bg"> 常用属性对象: </span>  常用的可用于随机生成的属性对象，包括:
     * <span class="pink-color grey-bg">UserAgent </span>   用户代理信息
     * <span class="pink-color grey-bg">City </span>  城市名
